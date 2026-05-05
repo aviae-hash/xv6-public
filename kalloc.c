@@ -87,8 +87,10 @@ kalloc(void)
   if(kmem.use_lock)
     acquire(&kmem.lock);
   r = kmem.freelist;
-  if(r)
+  if(r){
+    cprintf("[MEM] alloc page at 0x%x\n", (uint)r);
     kmem.freelist = r->next;
+}
   if(kmem.use_lock)
     release(&kmem.lock);
   return (char*)r;

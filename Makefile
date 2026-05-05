@@ -182,8 +182,8 @@ UPROGS=\
 	_wc\
 	_zombie\
 
-fs.img: mkfs README $(UPROGS)
-	./mkfs fs.img README $(UPROGS)
+fs.img: mkfs README $(UPROGS) $(UPROGS_EXTRA)
+	./mkfs fs.img README $(UPROGS) $(UPROGS_EXTRA)
 
 -include *.d
 
@@ -192,7 +192,7 @@ clean:
 	*.o *.d *.asm *.sym vectors.S bootblock entryother \
 	initcode initcode.out kernel xv6.img fs.img kernelmemfs \
 	xv6memfs.img mkfs .gdbinit \
-	$(UPROGS)
+	$(UPROGS) $(UPROGS_EXTRA)
 
 # make a printout
 FILES = $(shell grep -v '^\#' runoff.list)
@@ -284,3 +284,4 @@ tar:
 	(cd /tmp; tar cf - xv6) | gzip >xv6-rev10.tar.gz  # the next one will be 10 (9/17)
 
 .PHONY: dist-test dist
+UPROGS_EXTRA = _testwrite
