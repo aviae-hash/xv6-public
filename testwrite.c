@@ -6,3 +6,4 @@ int main() {
     write(1, "hello from write\n", 17);
     exit();
 }
+
